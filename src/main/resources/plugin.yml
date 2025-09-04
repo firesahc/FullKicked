@@ -1,0 +1,10 @@
+name: Full_kicked
+version: 1.2
+main: com.firesahc.Full_kicked
+commands:
+    reload_full_kicked:
+        description: "Reloads the config file"
+        permission: full_kicked.reload_full_kicked
+permissions:
+    full_kicked.reload_full_kicked:
+        default: op
