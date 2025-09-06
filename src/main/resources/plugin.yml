@@ -1,10 +1,29 @@
-name: Full_kicked
-version: 1.2
-main: com.firesahc.Full_kicked
+name: FullKicked
+version: 1.3
+main: com.firesahc.main
 commands:
-    reload_full_kicked:
-        description: "Reloads the config file"
-        permission: full_kicked.reload_full_kicked
+    reload_fk:
+        description: "Reload the config file"
+        usage: /<command>
+        permission: FullKicked.reload_fk
+    whitelist:
+        description: "List the current whitelist"
+        usage: /<command>
+        permission: FullKicked.whitelist
+    add_whitelist:
+        description: "Add player to the config file"
+        usage: /<command> <player>
+        permission: FullKicked.add_whitelist
+    remove_whitelist:
+        description: "Remove player from the config file"
+        usage: /<command> <player>
+        permission: FullKicked.remove_whitelist
 permissions:
-    full_kicked.reload_full_kicked:
+    FullKicked.reload_fk:
+        default: op
+    FullKicked.whitelist:
+        default: op
+    FullKicked.add_whitelist:
+        default: op
+    FullKicked.remove_whitelist:
         default: op
