@@ -20,9 +20,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class FullKicked implements Listener , CommandExecutor {
 
+    private final main main;
     private final Set<String> whitelist = Collections.synchronizedSet(new HashSet<>());
     private final Set<Player> nonWhitelistPlayers = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private FileConfiguration config;
+
+    public FullKicked(main main) {
+        this.main = main;
+    }
 
     // 动态更新玩家状态
     @EventHandler
@@ -71,7 +76,7 @@ public class FullKicked implements Listener , CommandExecutor {
             if (!whitelist.isEmpty()) {
                 whitelist.clear();
             }
-            config = main.main.getConfig();
+            config = main.getConfig();
             whitelist.addAll(config.getStringList("whitelist"));
             System.out.println("§e获取白名单成功");
         }catch (Exception e){
@@ -102,7 +107,7 @@ public class FullKicked implements Listener , CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (s.equalsIgnoreCase("reload_fk")) {
-            main.main.reloadConfig();
+            main.reloadConfig();
             getWhitelist();
             reloadNonWhitelistPlayers();
         }
@@ -112,13 +117,13 @@ public class FullKicked implements Listener , CommandExecutor {
         else if (s.equalsIgnoreCase("add_whitelist")) {
             whitelist.add(strings[0]);
             config.set("whitelist", new ArrayList<>(whitelist));
-            main.main.saveConfig();
+            main.saveConfig();
             reloadNonWhitelistPlayers();
         }
         else if (s.equalsIgnoreCase("remove_whitelist")) {
             whitelist.remove(strings[0]);
             config.set("whitelist", new ArrayList<>(whitelist));
-            main.main.saveConfig();
+            main.saveConfig();
             reloadNonWhitelistPlayers();
         }
         return true;
